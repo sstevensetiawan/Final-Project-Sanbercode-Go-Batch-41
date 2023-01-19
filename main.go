@@ -1,10 +1,13 @@
 package main
 
 import (
+	"Final-Project-Sanbercode-Go-Batch-41/controllers"
+	"Final-Project-Sanbercode-Go-Batch-41/database"
 	"database/sql"
 	"fmt"
 	"os"
 
+	"github.com/gin-gonic/gin"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/joho/godotenv"
 )
@@ -37,5 +40,15 @@ func main() {
 		panic(dbErr.Error())
 	}
 
+	database.DbConnect(DB)
+
 	defer DB.Close()
+
+	router := gin.Default()
+	router.GET("/user", controllers.GetAllUser)
+	router.POST("/user", controllers.InsertUser)
+	router.PUT("/user/:id", controllers.UpdateUser)
+	router.DELETE("/user/:id", controllers.DeleteUser)
+
+	router.Run("localhost:8080")
 }
