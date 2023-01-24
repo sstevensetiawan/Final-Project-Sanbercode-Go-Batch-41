@@ -36,6 +36,7 @@ func UpdateUser(db *sql.DB, user structs.User) (err error) {
 }
 
 func DeleteUser(db *sql.DB, user structs.User) (err error) {
-	errs := db.QueryRow("UPDATE user_account SET status = 0 WHERE id = ?", user.ID)
+	errs := db.QueryRow("UPDATE user_account SET status = 0 WHERE id = ?",
+		user.ID)
 	return errs.Err()
 }

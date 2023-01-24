@@ -10,12 +10,12 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func GetAllUser(c *gin.Context) {
+func GetAllProduct(c *gin.Context) {
 	var (
 		result gin.H
 	)
 
-	users, err := repository.GetAllUser(database.DBConnection)
+	users, err := repository.GetAllProduct(database.DBConnection)
 
 	if err != nil {
 		result = gin.H{
@@ -30,63 +30,63 @@ func GetAllUser(c *gin.Context) {
 	c.JSON(http.StatusOK, result)
 }
 
-func InsertUser(c *gin.Context) {
-	var user structs.User
+func InsertProduct(c *gin.Context) {
+	var product structs.Product
 
-	err := c.ShouldBindJSON(&user)
+	err := c.ShouldBindJSON(&product)
 	if err != nil {
 		panic(err)
 	}
 
-	err = repository.InsertUser(database.DBConnection, user)
+	err = repository.InsertProduct(database.DBConnection, product)
 	if err != nil {
 		panic(err)
 	}
 
 	c.JSON(http.StatusOK, gin.H{
-		"result": "Success Insert User",
+		"result": "Success Insert Product",
 	})
 }
 
-func UpdateUser(c *gin.Context) {
-	var user structs.User
+func UpdateProduct(c *gin.Context) {
+	var product structs.Product
 	id, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
 		panic(err)
 	}
-	err = c.ShouldBindJSON(&user)
+	err = c.ShouldBindJSON(&product)
 	if err != nil {
 		panic(err)
 	}
-	user.ID = uint64(id)
+	product.ID = uint64(id)
 
-	err = repository.UpdateUser(database.DBConnection, user)
+	err = repository.UpdateProduct(database.DBConnection, product)
 	if err != nil {
 		panic(err)
 	}
 
 	c.JSON(http.StatusOK, gin.H{
-		"result": "Success Update User",
+		"result": "Success Update Product",
 	})
 }
 
-func DeleteUser(c *gin.Context) {
-	var user structs.User
+func DeleteProduct(c *gin.Context) {
+	var product structs.Product
 	id, err := strconv.Atoi(c.Param("id"))
 
 	if err != nil {
 		panic(err)
 	}
 
-	user.ID = uint64(id)
-	user.Status = uint8(0)
+	product.ID = uint64(id)
+	product.Status = uint8(0)
 
-	err = repository.DeleteUser(database.DBConnection, user)
+	err = repository.DeleteProduct(database.DBConnection, product)
 	if err != nil {
 		panic(err)
 	}
 
 	c.JSON(http.StatusOK, gin.H{
-		"result": "Success Delete User",
+		"result": "Success Delete Product",
 	})
 }

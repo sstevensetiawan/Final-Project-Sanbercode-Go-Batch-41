@@ -24,19 +24,19 @@ func GetAllProduct(db *sql.DB) (err error, results []structs.Product) {
 }
 
 func InsertProduct(db *sql.DB, product structs.Product) (err error) {
-	errs := db.QueryRow("INSERT INTO product (name, description, price, quantity) VALUES ($1, $2, $3, $4)",
+	errs := db.QueryRow("INSERT INTO product (name, description, price, quantity) VALUES (?, ?, ?, ?)",
 		product.Name, product.Description, product.Price, product.Quantity)
 	return errs.Err()
 }
 
 func UpdateProduct(db *sql.DB, product structs.Product) (err error) {
-	errs := db.QueryRow("UPDATE product SET name = $1, description = $2, price = $3, quantity = $4 WHERE id = $5",
+	errs := db.QueryRow("UPDATE product SET name = ?, description = ?, price = ?, quantity = ? WHERE id = ?",
 		product.Name, product.Description, product.Price, product.Quantity, product.ID)
 	return errs.Err()
 }
 
 func DeleteProduct(db *sql.DB, product structs.Product) (err error) {
-	errs := db.QueryRow("UPDATE product SET status = $1 WHERE id = $2",
-		product.Status, product.ID)
+	errs := db.QueryRow("UPDATE product SET status = 0 WHERE id = ?",
+		product.ID)
 	return errs.Err()
 }
