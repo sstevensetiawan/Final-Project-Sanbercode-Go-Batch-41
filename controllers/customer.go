@@ -10,12 +10,12 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func GetAllUser(c *gin.Context) {
+func GetAllCustomer(c *gin.Context) {
 	var (
 		result gin.H
 	)
 
-	users, err := repository.GetAllUser(database.DBConnection)
+	users, err := repository.GetAllCustomer(database.DBConnection)
 
 	if err != nil {
 		result = gin.H{
@@ -30,63 +30,62 @@ func GetAllUser(c *gin.Context) {
 	c.JSON(http.StatusOK, result)
 }
 
-func InsertUser(c *gin.Context) {
-	var user structs.User
+func InsertCustomer(c *gin.Context) {
+	var customer structs.Customer
 
-	err := c.ShouldBindJSON(&user)
+	err := c.ShouldBindJSON(&customer)
 	if err != nil {
 		panic(err)
 	}
 
-	err = repository.InsertUser(database.DBConnection, user)
+	err = repository.InsertCustomer(database.DBConnection, customer)
 	if err != nil {
 		panic(err)
 	}
 
 	c.JSON(http.StatusOK, gin.H{
-		"result": "Success Insert User",
+		"result": "Success Insert Customer",
 	})
 }
 
-func UpdateUser(c *gin.Context) {
-	var user structs.User
+func UpdateCustomer(c *gin.Context) {
+	var customer structs.Customer
 	id, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
 		panic(err)
 	}
-	err = c.ShouldBindJSON(&user)
+	err = c.ShouldBindJSON(&customer)
 	if err != nil {
 		panic(err)
 	}
-	user.ID = uint64(id)
+	customer.ID = uint64(id)
 
-	err = repository.UpdateUser(database.DBConnection, user)
+	err = repository.UpdateCustomer(database.DBConnection, customer)
 	if err != nil {
 		panic(err)
 	}
 
 	c.JSON(http.StatusOK, gin.H{
-		"result": "Success Update User",
+		"result": "Success Update Customer",
 	})
 }
 
-func DeleteUser(c *gin.Context) {
-	var user structs.User
+func DeleteCustomer(c *gin.Context) {
+	var customer structs.Customer
 	id, err := strconv.Atoi(c.Param("id"))
 
 	if err != nil {
 		panic(err)
 	}
 
-	user.ID = uint64(id)
-	user.Status = uint8(0)
+	customer.ID = uint64(id)
 
-	err = repository.DeleteUser(database.DBConnection, user)
+	err = repository.DeleteCustomer(database.DBConnection, customer)
 	if err != nil {
 		panic(err)
 	}
 
 	c.JSON(http.StatusOK, gin.H{
-		"result": "Success Delete User",
+		"result": "Success Delete Customer",
 	})
 }

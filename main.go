@@ -45,11 +45,11 @@ func main() {
 	defer DB.Close()
 
 	router := gin.Default()
-	// user
-	router.GET("/user", controllers.GetAllUser)
-	router.POST("/user", controllers.InsertUser)
-	router.PUT("/user/:id", controllers.UpdateUser)
-	router.DELETE("/user/:id", controllers.DeleteUser)
+	// customer
+	router.GET("/customer", controllers.GetAllCustomer)
+	router.POST("/customer", controllers.InsertCustomer)
+	router.PUT("/customer/:id", controllers.UpdateCustomer)
+	router.DELETE("/customer/:id", controllers.DeleteCustomer)
 
 	// product
 	router.GET("/product", controllers.GetAllProduct)
