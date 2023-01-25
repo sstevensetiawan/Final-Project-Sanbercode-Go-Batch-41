@@ -14,7 +14,7 @@ func GetAllProduct(db *sql.DB) (err error, results []structs.Product) {
 
 	for rows.Next() {
 		var product = structs.Product{}
-		err = rows.Scan(&product.ID, &product.Name, &product.Price, &product.Quantity)
+		err = rows.Scan(&product.ID, &product.Name, &product.Description, &product.Price, &product.Quantity, &product.Status)
 		if err != nil {
 			panic(err)
 		}
@@ -24,8 +24,8 @@ func GetAllProduct(db *sql.DB) (err error, results []structs.Product) {
 }
 
 func InsertProduct(db *sql.DB, product structs.Product) (err error) {
-	errs := db.QueryRow("INSERT INTO product (name, description, price, quantity) VALUES (?, ?, ?, ?)",
-		product.Name, product.Description, product.Price, product.Quantity)
+	errs := db.QueryRow("INSERT INTO product (id, name, description, price, quantity, status) VALUES (?, ?, ?, ?, ?, ?)",
+		product.ID, product.Name, product.Description, product.Price, product.Quantity, product.Status)
 	return errs.Err()
 }
 

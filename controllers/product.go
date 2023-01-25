@@ -15,7 +15,7 @@ func GetAllProduct(c *gin.Context) {
 		result gin.H
 	)
 
-	users, err := repository.GetAllProduct(database.DBConnection)
+	products, err := repository.GetAllProduct(database.DBConnection)
 
 	if err != nil {
 		result = gin.H{
@@ -23,7 +23,7 @@ func GetAllProduct(c *gin.Context) {
 		}
 	} else {
 		result = gin.H{
-			"result": users,
+			"result": products,
 		}
 	}
 
