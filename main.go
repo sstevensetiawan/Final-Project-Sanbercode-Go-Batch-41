@@ -57,5 +57,10 @@ func main() {
 	router.PUT("/product/:id", controllers.UpdateProduct)
 	router.DELETE("/product/:id", controllers.DeleteProduct)
 
+	// invoice
+	router.GET("/invoice", controllers.GetAllInvoice)
+	router.GET("/invoice/:invoice_id", controllers.GetInvoice)
+	router.DELETE("/invoice/:invoice_id", controllers.DeleteInvoice)
+
 	router.Run("localhost:8080")
 }

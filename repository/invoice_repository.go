@@ -23,6 +23,24 @@ func GetAllInvoice(db *sql.DB) (err error, results []structs.HeaderInvoice) {
 	return
 }
 
+func GetInvoice(db *sql.DB, HeaderInvoice structs.HeaderInvoice) (err error, result structs.HeaderInvoice) {
+	rows, err := db.Query("SELECT * FROM header_invoice WHERE invoice_id = ? AND status = 1", HeaderInvoice.InvoiceID)
+	if err != nil {
+		panic(err)
+	}
+	defer rows.Close()
+
+	for rows.Next() {
+		var header_invoice = structs.HeaderInvoice{}
+		err = rows.Scan(&header_invoice.InvoiceID, &header_invoice.CustomerID, &header_invoice.SubtotalPrice, &header_invoice.Status)
+		if err != nil {
+			panic(err)
+		}
+		result = header_invoice
+	}
+	return
+}
+
 func InsertHeaderInvoice(db *sql.DB, HeaderInvoice structs.HeaderInvoice) (err error) {
 	errs := db.QueryRow("INSERT INTO header_invoice (invoice_id, customer_id, subtotal_price, status) VALUES (?, ?, ?, ?)",
 		HeaderInvoice.InvoiceID, HeaderInvoice.CustomerID, HeaderInvoice.SubtotalPrice, HeaderInvoice.Status)
