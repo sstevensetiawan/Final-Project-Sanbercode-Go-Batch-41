@@ -1,0 +1,167 @@
+{
+	"info": {
+		"_postman_id": "8823ed52-73ba-40f7-95da-3cc2e5e77bc4",
+		"name": "New Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "4274594"
+	},
+	"item": [
+		{
+			"name": "Customer",
+			"item": [
+				{
+					"name": "Get All Customer",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": "http://localhost:8080/customer"
+					},
+					"response": []
+				},
+				{
+					"name": "Insert Customer",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"name\": \"Steven\",\r\n    \"status\": 1\r\n}"
+						},
+						"url": "http://localhost:8080/customer"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Customer",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Salim\",\r\n    \"status\": 1\r\n}"
+						},
+						"url": "http://localhost:8080/customer/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Customer",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": "http://localhost:8080/customer/1"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "Get All Product",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/product"
+					},
+					"response": []
+				},
+				{
+					"name": "Insert Product",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"name\": \"Nasi Goreng\",\r\n    \"description\": \"makanan terenak\",\r\n    \"price\": 10000,\r\n    \"quantity\": 2,\r\n    \"status\": 1\r\n}"
+						},
+						"url": "http://localhost:8080/product"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Product",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Ikan bakar\",\r\n    \"description\": \"makanan terlezat\",\r\n    \"price\": 5000,\r\n    \"quantity\": 5\r\n}"
+						},
+						"url": "http://localhost:8080/product/2"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Product",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:8080/product/2"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Invoice",
+			"item": [
+				{
+					"name": "Get All Invoice",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/invoice"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Invoice",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/invoice/2"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Invoice",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:8080/invoice/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Insert Invoice",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"header_invoice\": {\r\n        \"invoice_id\": 1,\r\n        \"customer_id\": 1,\r\n        \"subtotal_price\": 20000,\r\n        \"status\": 1\r\n    },\r\n    \"detail_invoice\": {\r\n        {\r\n            \"invoice_id\": 1,\r\n            \"product_id\": 1,\r\n            \"product_price\": 10000,\r\n            \"quantity\": 2,\r\n            \"total_price\": 20000,\r\n            \"status\": 1\r\n        }\r\n    }\r\n}"
+						},
+						"url": "http://localhost:8080/invoice"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
